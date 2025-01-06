@@ -3,15 +3,13 @@ pipeline {
     parameters {
         choice(name: 'ACTION', choices: ['plan', 'apply', 'destroy'], description: 'Select the Terraform action to execute')
     }
-    withCredentials([[
-                    credentialsId: "Durga_ID",
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-                ]]) 
     stages {
         stage('Initialize Terraform') {
             steps {
-                script {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                                  credentialsId: 'Durga_ID',
+                                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh 'terraform init'
                 }
             }
@@ -21,7 +19,10 @@ pipeline {
                 expression { params.ACTION == 'plan' }
             }
             steps {
-                script {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                                  credentialsId: 'Durga_ID',
+                                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh 'terraform plan'
                 }
             }
@@ -31,7 +32,10 @@ pipeline {
                 expression { params.ACTION == 'apply' }
             }
             steps {
-                script {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                                  credentialsId: 'Durga_ID',
+                                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh 'terraform apply -auto-approve'
                 }
             }
@@ -41,7 +45,10 @@ pipeline {
                 expression { params.ACTION == 'destroy' }
             }
             steps {
-                script {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                                  credentialsId: 'Durga_ID',
+                                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh 'terraform destroy -auto-approve'
                 }
             }
