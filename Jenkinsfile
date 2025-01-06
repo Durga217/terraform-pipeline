@@ -9,8 +9,9 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                                   credentialsId: 'Durga_ID',
                                   accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    sh 'terraform init'
+                                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                                 ]]) {
+                    sh "terraform init"
                 }
             }
         }
@@ -23,7 +24,7 @@ pipeline {
                                   credentialsId: 'Durga_ID',
                                   accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                                   secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    sh 'terraform plan'
+                    sh "terraform plan"
                 }
             }
         }
@@ -36,7 +37,7 @@ pipeline {
                                   credentialsId: 'Durga_ID',
                                   accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                                   secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    sh 'terraform apply -auto-approve'
+                    sh "terraform apply -auto-approve"
                 }
             }
         }
@@ -49,7 +50,7 @@ pipeline {
                                   credentialsId: 'Durga_ID',
                                   accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                                   secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    sh 'terraform destroy -auto-approve'
+                    sh "terraform destroy -auto-approve"
                 }
             }
         }
