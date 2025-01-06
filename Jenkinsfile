@@ -3,10 +3,11 @@ pipeline {
     parameters {
         choice(name: 'ACTION', choices: ['plan', 'apply', 'destroy'], description: 'Select the Terraform action to execute')
     }
-    environment {
-        AWS_ACCESS_KEY_ID = credentials('AKIAVRYNLZNSIYSCATUI') 
-        AWS_SECRET_ACCESS_KEY = credentials('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') 
-    }
+    withCredentials([[
+                    credentialsId: "Durga_ID",
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]) 
     stages {
         stage('Initialize Terraform') {
             steps {
