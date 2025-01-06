@@ -4,8 +4,8 @@ pipeline {
         choice(name: 'ACTION', choices: ['plan', 'apply', 'destroy'], description: 'Select the Terraform action to execute')
     }
     environment {
-        AWS_ACCESS_KEY_ID = credentials('aws-access-key') // Replace with your Jenkins credential ID
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-key') // Replace with your Jenkins credential ID
+        AWS_ACCESS_KEY_ID = credentials('AKIAVRYNLZNSIYSCATUI') 
+        AWS_SECRET_ACCESS_KEY = credentials('X9gyO6mwQrn/qsPWte0ygN6jALjQ1R3/ZRER8ke3') 
     }
     stages {
         stage('Initialize Terraform') {
